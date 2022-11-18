@@ -1,6 +1,6 @@
 import expres from "express";
 import {decodeToken} from "../middleware/token";
-import {updateUser, verifyPasword} from "../services/userServices";
+import {updatePassword, verifyPasword} from "../services/userServices";
 
 const dotenv = require('dotenv');
 
@@ -18,7 +18,7 @@ router.put("/change-password", async (req, res) => {
 
     if (passwordNew === passwordConfirm && await verifyPasword(dataToken.email, password)) {
 
-        if (await updateUser(dataToken.email, passwordNew)) {
+        if (await updatePassword(dataToken.email, passwordNew)) {
             res.status(200).send({"mensaje": "Contraseña actualizada"})
         }
     } else {
