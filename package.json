@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "dev": "ts-node-dev src/app.ts",
     "tsc": "tsc",
-    "start": "node build/index.js",
+    "start": "node build/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
