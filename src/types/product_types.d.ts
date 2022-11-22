@@ -4,10 +4,10 @@ export interface Product {
     id_categories: String,
     id_providers: String,
     bar_code: Number,
-    stock: Number,
+    stock: number,
     name_product: String,
-    price: Number,
-    cost: Number
+    price: number,
+    cost: number
 }
 
 export type NewProduct = Omit<Product, "id">

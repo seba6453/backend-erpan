@@ -1,5 +1,5 @@
 import express from "express";
-import {createToken} from "../middleware/token";
+import {createToken, verifyToken} from "../middleware/token";
 import {addBlackList} from "../services/tokenServices";
 import {createUser, deleteUser, existUser, getUser, updatePassword} from '../services/userServices';
 import {NewUser, User, UserLogin, UserResponse} from "../types/user_types";
@@ -127,6 +127,21 @@ router.post("/logout", async (req, res) => {
         res.status(400).send({"mensaje":"No se ha cerrado la session"});
     }
 });
+
+router.get("/verify-token", async(req,res) => {
+    const token = req.get('Authorization')?.substring(7);
+    if(token != undefined){
+        if(await verifyToken(token)){
+            res.status(200).send({"mensaje":"token valido"});
+        }else{
+            res.status(404).send({"mensaje":"token invalido"});
+        }
+    }else{
+        res.status(404).send({"mensaje":"token invalido"});
+    }
+    
+
+})
 
 
 export default router;

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTicket = exports.addTicket = exports.getAll = void 0;
+exports.deleteTicket = exports.getTicket = exports.addTicket = exports.getAll = void 0;
 const dataBase_1 = require("../dataBase");
 const getAll = (id_business) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `select * from tickets where id_business = ${id_business}`;
@@ -30,6 +30,16 @@ const addTicket = (newTicket) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.addTicket = addTicket;
+const getTicket = (id, id_business) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from tickets tk where id = ${id} and id_business = ${id_business}`;
+    const result = yield dataBase_1.client.query(query);
+    if (result.rowCount >= 1) {
+        const ticket = result.rows[0];
+        return ticket;
+    }
+    return undefined;
+});
+exports.getTicket = getTicket;
 const deleteTicket = (id, id_business) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `DELETE FROM tickets WHERE id=${id} and id_business=${id_business}`;
     const result = yield dataBase_1.client.query(query);

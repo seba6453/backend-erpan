@@ -19,6 +19,16 @@ export const addTicket = async (newTicket: NewTicket) => {
     }
 }
 
+export const getTicket = async (id: Number, id_business: Number): Promise<Ticket | undefined> => {
+    const query = `select * from tickets tk where id = ${id} and id_business = ${id_business}`
+    const result = await client.query(query);
+    if (result.rowCount >= 1) {
+        const ticket: Ticket = result.rows[0];
+        return ticket;
+    }
+    return undefined;
+}
+
 export const deleteTicket = async (id: Number, id_business: Number) => {
     const query = `DELETE FROM tickets WHERE id=${id} and id_business=${id_business}`;
     const result = await client.query(query);

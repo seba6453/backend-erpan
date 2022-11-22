@@ -153,4 +153,19 @@ router.post("/logout", (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(400).send({ "mensaje": "No se ha cerrado la session" });
     }
 }));
+router.get("/verify-token", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
+    const token = (_b = req.get('Authorization')) === null || _b === void 0 ? void 0 : _b.substring(7);
+    if (token != undefined) {
+        if (yield (0, token_1.verifyToken)(token)) {
+            res.status(200).send({ "mensaje": "token valido" });
+        }
+        else {
+            res.status(404).send({ "mensaje": "token invalido" });
+        }
+    }
+    else {
+        res.status(404).send({ "mensaje": "token invalido" });
+    }
+}));
 exports.default = router;

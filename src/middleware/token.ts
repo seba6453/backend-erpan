@@ -31,3 +31,14 @@ export const decodeToken = (token: string | undefined) => {
     const data = jwt.decode(token, process.env.JWT_PRIVATE_KEY);
     return data;
 };
+
+export const verifyToken = async (token: string) => {
+    try {
+        console.log(await jwt.verify(token, process.env.JWT_PRIVATE_KEY));
+        return true
+      } catch(err) {
+        // err
+        console.error(err);
+        return false
+      }
+}

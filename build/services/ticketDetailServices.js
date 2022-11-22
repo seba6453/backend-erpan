@@ -19,14 +19,18 @@ const getTicketDetail = (id_ticket) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.getTicketDetail = getTicketDetail;
 const addTicketDetail = (list_detail, id_ticket) => __awaiter(void 0, void 0, void 0, function* () {
-    list_detail.map((dato) => __awaiter(void 0, void 0, void 0, function* () {
-        const query = `insert into ticket_detail(id_product,id_ticket,total_price,amount) values(${dato.id_product},${id_ticket},${dato.total_price},${dato.amount});`;
+    let confi;
+    for (let i = 0; i < list_detail.length; i++) {
+        const dato = list_detail[i];
+        const query = `select insert_ticket_detail(${dato.id_product},${id_ticket},cast(${dato.total_price} as money),${dato.amount});`;
         try {
-            yield dataBase_1.client.query(query);
+            const result = yield dataBase_1.client.query(query);
+            confi = result.rows[0];
         }
         catch (err) {
             console.error(err);
         }
-    }));
+    }
+    return confi;
 });
 exports.addTicketDetail = addTicketDetail;

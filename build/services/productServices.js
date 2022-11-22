@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.searchProduct = exports.deleteProduct = exports.updateProduct = exports.getProductBarcode = exports.getProduct = exports.addProduct = exports.getAll = void 0;
+exports.verifyStock = exports.searchProduct = exports.deleteProduct = exports.updateProduct = exports.getProductBarcode = exports.getProduct = exports.addProduct = exports.getAll = void 0;
 const dataBase_1 = require("../dataBase");
 const categoryServices_1 = require("./categoryServices");
 const providerServices_1 = require("./providerServices");
@@ -104,3 +104,15 @@ const searchProduct = (palabra, id_business) => __awaiter(void 0, void 0, void 0
     return products;
 });
 exports.searchProduct = searchProduct;
+const verifyStock = (id, count, id_business) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from products pr where id = ${id} and id_business = ${id_business};`;
+    const result = yield dataBase_1.client.query(query);
+    if (result.rowCount > 0) {
+        const product = result.rows[0];
+        if (product.stock - count >= 0) {
+            return true;
+        }
+    }
+    return false;
+});
+exports.verifyStock = verifyStock;

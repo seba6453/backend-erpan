@@ -100,3 +100,15 @@ export const searchProduct = async (palabra: String, id_business: Number): Promi
     const products = result.rows;
     return products;
 }
+
+export const verifyStock = async (id:Number, count: number, id_business: Number) => {
+    const query = `select * from products pr where id = ${id} and id_business = ${id_business};`
+    const result = await client.query(query);
+    if (result.rowCount > 0) {
+        const product:Product = result.rows[0];
+        if(product.stock - count >= 0){
+            return true
+        }
+    }
+    return false;
+}

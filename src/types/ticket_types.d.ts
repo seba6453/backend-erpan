@@ -7,3 +7,5 @@ export interface Ticket {
 }
 
 export type NewTicket = Omit<Ticket,"id">;
+
+export type UpdateTicket = Omit<Ticket, "id"|"id_business">;
