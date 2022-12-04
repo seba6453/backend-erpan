@@ -40,7 +40,7 @@ const decodeToken = (token) => {
 exports.decodeToken = decodeToken;
 const verifyToken = (token) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(yield jwt.verify(token, process.env.JWT_PRIVATE_KEY));
+        yield jwt.verify(token, process.env.JWT_PRIVATE_KEY);
         return true;
     }
     catch (err) {

@@ -80,7 +80,7 @@ const getProductBarcode = (barcode, id_business) => __awaiter(void 0, void 0, vo
 });
 exports.getProductBarcode = getProductBarcode;
 const updateProduct = (id, updateProduct, id_business) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `UPDATE public.products SET name_product='${updateProduct.name_product.toLowerCase()}',id_categories = upper('${updateProduct.id_categories}'),id_providers = upper('${updateProduct.id_providers}'),bar_code=${updateProduct.bar_code},price=${updateProduct.price},stock=${updateProduct.stock} WHERE id=${id} and id_business=${id_business};`;
+    const query = `UPDATE public.products SET name_product='${updateProduct.name_product.toLowerCase()}',id_categories = upper('${updateProduct.id_categories}'),id_providers = upper('${updateProduct.id_providers}'),bar_code=${updateProduct.bar_code},price=${updateProduct.price},cost=${updateProduct.cost},stock=${updateProduct.stock} WHERE id=${id} and id_business=${id_business};`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount > 0) {
         return true;

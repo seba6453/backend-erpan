@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteTicket = exports.getTicket = exports.addTicket = exports.getAll = void 0;
 const dataBase_1 = require("../dataBase");
 const getAll = (id_business) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from tickets where id_business = ${id_business}`;
+    const query = `select * from tickets ts where ts.id_business = ${id_business} order by ts.id desc`;
     const result = yield dataBase_1.client.query(query);
     const allTicket = result.rows;
     return allTicket;
