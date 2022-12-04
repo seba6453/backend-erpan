@@ -34,7 +34,7 @@ export const decodeToken = (token: string | undefined) => {
 
 export const verifyToken = async (token: string) => {
     try {
-        console.log(await jwt.verify(token, process.env.JWT_PRIVATE_KEY));
+        await jwt.verify(token, process.env.JWT_PRIVATE_KEY);
         return true
       } catch(err) {
         // err

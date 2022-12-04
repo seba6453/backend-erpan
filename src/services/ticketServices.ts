@@ -2,7 +2,7 @@ import { client } from "../dataBase";
 import { NewTicket, Ticket } from "../types/ticket_types";
 
 export const getAll = async (id_business:Number): Promise<Ticket[]> => {
-    const query = `select * from tickets where id_business = ${id_business}`;
+    const query = `select * from tickets ts where ts.id_business = ${id_business} order by ts.id desc`;
     const result = await client.query(query);
     const allTicket = result.rows;
     return allTicket;
