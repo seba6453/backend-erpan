@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.searchProvider = exports.deleteProvider = exports.getProvider = exports.updateProvider = exports.addProvider = exports.getAll = void 0;
 const dataBase_1 = require("../dataBase");
-const getAll = (id_business) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from providers p where p.id_business = ${id_business}`;
+const getAll = (_id_business) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `SELECT * FROM providers p`;
     const result = yield dataBase_1.client.query(query);
     const allProvider = result.rows;
     return allProvider;
@@ -39,8 +39,8 @@ const updateProvider = (id, updateProvider, id_business) => __awaiter(void 0, vo
     return false;
 });
 exports.updateProvider = updateProvider;
-const getProvider = (id, id_business) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from providers p where p.id_business = ${id_business} and p.name_providers = upper('${id}')`;
+const getProvider = (id, _id_business) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from providers p where p.name_providers = upper('${id}')`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount >= 1) {
         const provider = result.rows[0];
@@ -58,8 +58,8 @@ const deleteProvider = (id, id_business) => __awaiter(void 0, void 0, void 0, fu
     return false;
 });
 exports.deleteProvider = deleteProvider;
-const searchProvider = (palabra, id_business) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from providers WHERE name_providers like upper('%${palabra}%') and id_business=${id_business}`;
+const searchProvider = (palabra, _id_business) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from providers WHERE name_providers like upper('%${palabra}%')`;
     const result = yield dataBase_1.client.query(query);
     const providers = result.rows;
     return providers;
