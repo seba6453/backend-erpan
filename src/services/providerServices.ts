@@ -1,8 +1,8 @@
 import {client} from "../dataBase";
 import {NewProvider, Provider} from "../types/provider_type";
 
-export const getAll = async (id_business: Number): Promise<Provider[]> => {
-    const query = `select * from providers p where p.id_business = ${id_business}`;
+export const getAll = async (_id_business: Number): Promise<Provider[]> => {
+    const query = `select * from providers p`;
     const result = await client.query(query);
     const allProvider = result.rows;
     return allProvider;
@@ -28,8 +28,8 @@ export const updateProvider = async (id: String, updateProvider: NewProvider, id
     return false;
 };
 
-export const getProvider = async (id: String, id_business: Number): Promise<Provider | undefined> => {
-    const query = `select * from providers p where p.id_business = ${id_business} and p.name_providers = upper('${id}')`
+export const getProvider = async (id: String, _id_business: Number): Promise<Provider | undefined> => {
+    const query = `select * from providers p where p.name_providers = upper('${id}')`
     const result = await client.query(query);
     if (result.rowCount >= 1) {
         const provider: Provider = result.rows[0];
@@ -47,8 +47,8 @@ export const deleteProvider = async (id: String, id_business: Number) => {
     return false;
 };
 
-export const searchProvider = async (palabra: String, id_business: Number): Promise<Provider[]> => {
-    const query = `select * from providers WHERE name_providers like upper('%${palabra}%') and id_business=${id_business}`;
+export const searchProvider = async (palabra: String, _id_business: Number): Promise<Provider[]> => {
+    const query = `select * from providers WHERE name_providers like upper('%${palabra}%')`;
     const result = await client.query(query);
     const providers = result.rows;
     return providers;
